@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import cv2
-from network import Network
+from network import Network 
 import torch
 from utils import to_numpy, get_transforms, add_img_text
 from dataset import EMOTIONS_MAP
@@ -24,18 +24,18 @@ def predict(img_title_paths):
         args:
         - img_title_paths (dict): diccionario con el titulo de la imagen (key) y el path (value)
     '''
-    # Cargar el modelo
+   # Cargar el modelo
     modelo = Network(48, 7)
-    modelo.load_model("modelo_1.pt")
+    modelo.load_model("modelo_1")
     for path in img_title_paths:
         # Cargar la imagen
         # np.ndarray, torch.Tensor
         im_file = (file_path / path).as_posix()
         original, transformed, denormalized = load_img(im_file)
-
+       
         # Inferencia
-        logits, proba = modelo.predict(transformed)
-        pred = torch.argmax(proba, -1).item()
+        logits = modelo.predict(transformed)
+        pred = torch.argmax(logits, -1).item()
         pred_label = EMOTIONS_MAP[pred]
 
         # Original / transformada
@@ -53,5 +53,22 @@ def predict(img_title_paths):
 
 if __name__=="__main__":
     # Direcciones relativas a este archivo
-    img_paths = ["./test_imgs/happy.png"]
+    img_paths = [
+        "./test_imgs/happy.png",
+        "./test_imgs/felizalv.png",
+        "./test_imgs/asombradoalv.png",
+        "./test_imgs/neutroalv.png",
+        "./test_imgs/sadalv.png",
+        "./test_imgs/ferfeliz.png",
+        "./test_imgs/ferneutro.png",
+        "./test_imgs/fertriste.png",
+        "./test_imgs/orlafeliz.png",
+        "./test_imgs/orlaneutro.png",
+        "./test_imgs/orlasad.png",
+        "./test_imgs/orlasorpresa.png",
+
+
+
+        ]
     predict(img_paths)
+    
