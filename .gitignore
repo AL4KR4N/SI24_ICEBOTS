@@ -135,4 +135,6 @@ dmypy.json
 */models/*.pt
 */data/*
 src/si24/proyectos/P02_facial_expressions/data/*
-src/si24/ejercicios/E08_cnn/data/
+src/si24/ejercicios/E08_cnn/data/*
+src/si24/proyectos/P02_facial_expressions/models/*
+*.png
